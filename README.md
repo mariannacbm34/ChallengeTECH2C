@@ -40,6 +40,29 @@ To run the project, you’ll need one of the following setups:
  ```bash
    pip install -r requirements.txt
 ```
+3. **Run the Application:**
+ ```bash
+   python app.py
+```
+4. **Open in Browser:**
+   Access the app at http://localhost:5000.
+
+---
+# ⚙️ Running with Docker:
+
+1. **Build the Docker Image:**
+   ```bash
+   docker build -t challenge .
+   ```
+2. **Run the Container:**
+   ```bash
+   docker run -p 5000:5000 challenge
+   ```
+3. **Access the Application:**
+   Visit http://localhost:5000 in your web browser.
+
+
+
 
 
  
