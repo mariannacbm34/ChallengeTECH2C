@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Emissões e Consumo</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Total de Emissões de CO₂ por Ano</h1>
+    <div class="btn-group">
+      <button onclick="updateChartType('bar')">Gráfico de Barras</button>
+      <button onclick="updateChartType('line')">Gráfico de Linhas</button>
+    </div>
+    <div id="chart-data"
+         data-anos='{{ emissoes.keys() | list | tojson }}'
+         data-valores='{{ emissoes.values() | list | tojson }}'>
+    </div>
+    <canvas id="emissoesChart"></canvas>
+
+    <div class="section" id="consumo-section">
+      <h2>Média de Consumo de Energia por Empresa</h2>
+      <div class="filter-container">
+        <input type="text" id="consumoFilter" placeholder="Filtrar empresas..." onkeyup="filterList('consumoFilter', 'consumoList')">
+      </div>
+      {% if media_consumo %}
+      <ul id="consumoList">
+        {% for empresa, consumo in media_consumo.items() %}
+          <li data-empresa="{{ empresa | lower }}"  data-detalhes="Detalhes sobre {{ empresa }}: emissão de {{ emissao }} toneladas.">
+            <strong>{{ empresa }}</strong>: {{ consumo }} MWh
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p>Dados não encontrados.</p>
+      {% endif %}
+    </div>
+
+    <div class="section" id="top5-section">
+      <h2>Top 5 Empresas com Maior Emissão</h2>
+      <div class="filter-container">
+        <input type="text" id="top5Filter" placeholder="Filtrar empresas..." onkeyup="filterList('top5Filter', 'top5List')">
+      </div>
+      {% if top_5 %}
+      <ul id="top5List">
+        {% for empresa, emissao in top_5.items() %}
+          <li data-empresa="{{ empresa | lower }}" data-detalhes="Detalhes sobre {{ empresa }}: emissão de {{ emissao }} toneladas.">
+            <strong>{{ empresa }}</strong>: {{ emissao }} toneladas
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p>Dados não encontrados.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modalTitle">Título</h3>
+      <p id="modalDetails">Detalhes...</p>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+
