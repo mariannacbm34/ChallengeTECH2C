@@ -36,7 +36,11 @@ To run the project, you’ll need one of the following setups:
    ```bash
    git clone <repository-url>
    cd ChallengeTech2C
-2.**Install Dependencies:**
-    
-    
+2. **Install Dependencies:**
+ ```bash
+   pip install -r requirements.txt
+```
 
+
+ 
+    
