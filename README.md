@@ -34,7 +34,7 @@ To run the project, you’ll need one of the following setups:
 
 1. **Clone the Repository:**  
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/mariannacbm34/ChallengeTECH2C.git
    cd ChallengeTech2C
 2. **Install Dependencies:**
  ```bash
